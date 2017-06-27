@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<!--
+  Hexagon stacks
+ -->
+<robot name="stack_extended_top_1m" xmlns:xacro="http://ros.org/wiki/xacro">
+  <xacro:include filename="$(find turtlebot_description)/urdf/common_properties.urdf.xacro"/>
+  
+  <!-- Xacro properties -->
+  <xacro:property name="M_SCALE" value="0.001"/>
+  
+  <!-- Xacro macros -->
+  <!-- Pole macros -->
+  <xacro:macro name="stack_pole_40cm" params="parent number x_loc y_loc z_loc">
+    <joint name="stack_pole_40cm_${number}_joint" type="fixed">
+      <origin xyz="${x_loc} ${y_loc} ${z_loc}" rpy="0 0 0"/>
+      <parent link="${parent}"/>
+      <child link="stack_pole_40cm_${number}_link"/>
+    </joint>
+    <link name="stack_pole_40cm_${number}_link">
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <cylinder length="0.4" radius="0.006"/>
+        </geometry>
+        <xacro:insert_block name="material_light_grey" />
+      </visual>
+    </link>
+  </xacro:macro>
+  
+  <xacro:macro name="stack_pole_20cm" params="parent number x_loc y_loc z_loc">
+    <joint name="stack_pole_20cm_${number}_joint" type="fixed">
+      <origin xyz="${x_loc} ${y_loc} ${z_loc}" rpy="0 0 0"/>
+      <parent link="${parent}"/>
+      <child link="stack_pole_20cm_${number}_link"/>
+    </joint>
+    <link name="stack_pole_20cm_${number}_link">
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <cylinder length="0.2" radius="0.006"/>
+        </geometry>
+        <xacro:insert_block name="material_light_grey" />
+      </visual>
+    </link>
+  </xacro:macro>
+
+  <!-- 
+    Stack macro - all the components relative transforms are made with respect 
+    to the parent link (usually base_link). They could be made relative to each
+    other, but there is no necessary reason to do so.
+  -->
+  <xacro:macro name="stack_extended_top_1m" params="parent">
+    <stack_pole_40cm parent="${parent}" number="0" x_loc="-0.1024" y_loc= "0.098" z_loc="0.6"/>
+    <stack_pole_40cm parent="${parent}" number="1" x_loc="-0.1024" y_loc= "0.098" z_loc="1.0"/>
+    <stack_pole_20cm parent="${parent}" number="0" x_loc="-0.1024" y_loc= "0.098" z_loc="1.2"/>
+    <stack_pole_40cm parent="${parent}" number="2" x_loc="-0.1024" y_loc="-0.098" z_loc="0.6"/>
+    <stack_pole_40cm parent="${parent}" number="3" x_loc="-0.1024" y_loc="-0.098" z_loc="1.0"/>
+    <stack_pole_20cm parent="${parent}" number="1" x_loc="-0.1024" y_loc="-0.098" z_loc="1.2"/>
+  </xacro:macro>
+</robot>

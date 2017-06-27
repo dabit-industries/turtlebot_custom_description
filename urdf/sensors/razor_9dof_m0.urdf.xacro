@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<robot name="sensor_razor_imu_m0" xmlns:xacro="http://ros.org/wiki/xacro">
+  <xacro:include filename="$(find turtlebot_description)/urdf/turtlebot_gazebo.urdf.xacro"/>
+  <xacro:include filename="$(find turtlebot_description)/urdf/turtlebot_properties.urdf.xacro"/>
+
+  <!-- Xacro properties -->
+  <xacro:property name="baseplate_px" value="0"/>
+  <xacro:property name="baseplate_py" value="0"/>
+  <xacro:property name="baseplate_pz" value="0.3785"/>
+  <xacro:property name="imu_px" value="0"/>
+  <xacro:property name="imu_py" value="0.011"/>
+  <xacro:property name="imu_pz" value="0"/>
+  <xacro:property name="mesh_display_scale" value="0.001"/>
+  <!-- Parameterised in part by the values in turtlebot_properties.urdf.xacro -->
+  <xacro:macro name="sensor_razor_imu_m0" params="parent">
+    <joint name="imu_baseplate_joint" type="fixed">
+      <origin xyz="${baseplate_px} ${baseplate_py} ${baseplate_pz}"
+        rpy="0 0 -${M_PI/2}"/>
+      <parent link="${parent}"/>
+      <child link="imu_baseplate" />
+    </joint>
+    <link name="imu_baseplate">
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <mesh filename="package://turtlebot_custom_description/meshes/sensors/razor_baseplate.STL" scale="${mesh_display_scale} ${mesh_display_scale} ${mesh_display_scale}"/>
+        </geometry>
+        <xacro:insert_block name="material_dark_grey" />
+      </visual>
+    </link>
+
+    <joint name="imu_joint" type="fixed">
+      <origin xyz="${imu_px} ${imu_py} ${imu_pz}"
+        rpy="0 0 ${M_PI/2}"/>
+      <parent link="imu_baseplate"/>
+      <child link="imu_link"/>
+    </joint>
+    <link name="imu_link">
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <mesh filename="package://turtlebot_custom_description/meshes/sensors/razor_9dof.STL" scale="${mesh_display_scale} ${mesh_display_scale} ${mesh_display_scale}"/>
+        </geometry>
+        <xacro:insert_block name="material_black" />
+      </visual>
+    </link>
+
+  </xacro:macro>
+</robot>
