@@ -32,3 +32,7 @@ ROS Catkin package to use different URDF configurations for the Turtlebot 2
 ![](images/robot_model_.8m_tall.png)  
 3. Turtlebot Quanergy M8:  
 ![](images/robot_model_m8.png)  
+
+## References
+[ROS WIKI URDF](http://wiki.ros.org/urdf)  
+[ROS WIKI Xacro Reference](http://wiki.ros.org/xacro)  
