@@ -26,5 +26,9 @@ ROS Catkin package to use different URDF configurations for the Turtlebot 2
 ![](images/rviz_frame.png)  
 
 ## Robot Models
-1. Turtlebot 1.2m tall:
-![](images/robot_model_.8m_tall.png)
+1. Turtlebot2 Kobuki Astra:  
+![](images/robot_model_kobuki_astra.png)  
+2. Turtlebot 1.2m tall:  
+![](images/robot_model_.8m_tall.png)  
+3. Turtlebot Quanergy M8:  
+![](images/robot_model_m8.png)  
